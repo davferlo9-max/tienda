@@ -2,6 +2,27 @@
 (() => {
   "use strict";
 
+  // ── Fallback de portadas en cascada ─────────────────────
+  // Recorre COVER_SOURCES; si se agotan, muestra un marcador con el título.
+  window.coverFallback = function (img) {
+    const appId = Number(img.dataset.app);
+    const next = Number(img.dataset.idx) + 1;
+    const sources = COVER_SOURCES(appId);
+    if (next < sources.length) {
+      img.dataset.idx = next;
+      img.src = sources[next];
+      return;
+    }
+    // Agotadas las fuentes: marcador legible con el título.
+    const title = decodeURIComponent(img.dataset.title || "Juego");
+    const parent = img.parentElement;
+    img.remove();
+    const ph = document.createElement("div");
+    ph.className = "card__placeholder";
+    ph.innerHTML = `<span>🎮</span><p>${title}</p>`;
+    parent.appendChild(ph);
+  };
+
   // ── Estado ──────────────────────────────────────────────
   const state = {
     category: "all",
@@ -64,7 +85,8 @@
           ${p.badge ? `<span class="card__badge">${p.badge}</span>` : ""}
           <span class="card__plat">${PLATFORM_LABEL[p.platform]}</span>
           <img class="card__img" src="${coverUrl(p.appId)}" alt="Carátula de ${p.title}"
-               loading="lazy" onerror="this.classList.add('is-broken')" />
+               loading="lazy" data-app="${p.appId}" data-idx="0" data-title="${encodeURIComponent(p.title)}"
+               onerror="window.coverFallback(this)" />
         </div>
         <div class="card__body">
           <h3 class="card__title">${p.title}</h3>
@@ -110,7 +132,9 @@
           const p = byId(id);
           return `
             <div class="cart-item">
-              <img class="cart-item__thumb" src="${coverUrl(p.appId)}" alt="" loading="lazy" />
+              <img class="cart-item__thumb" src="${coverUrl(p.appId)}" alt="" loading="lazy"
+                   data-app="${p.appId}" data-idx="0" data-title="${encodeURIComponent(p.title)}"
+                   onerror="window.coverFallback(this)" />
               <div class="cart-item__info">
                 <p class="cart-item__name">${p.title}</p>
                 <p class="cart-item__price">${fmt(p.price)}</p>

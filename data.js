@@ -19,6 +19,15 @@ const PRODUCTS = [
 
 const PLATFORM_LABEL = { ps5: "PS5", xbox: "XBOX", switch: "SWITCH", pc: "PC" };
 
-/** Devuelve la URL de la carátula vertical oficial para un App ID de Steam. */
-const coverUrl = (appId) =>
-  `https://cdn.cloudflare.steamstatic.com/steam/apps/${appId}/library_600x900.jpg`;
+/* Fuentes de portada en cascada por App ID de Steam.
+   header.jpg existe para todos los juegos; el resto son respaldos. */
+const COVER_SOURCES = (appId) => [
+  `https://cdn.cloudflare.steamstatic.com/steam/apps/${appId}/library_600x900_2x.jpg`,
+  `https://cdn.cloudflare.steamstatic.com/steam/apps/${appId}/library_600x900.jpg`,
+  `https://shared.cloudflare.steamstatic.com/store_item_assets/steam/apps/${appId}/library_600x900.jpg`,
+  `https://cdn.akamai.steamstatic.com/steam/apps/${appId}/header.jpg`,
+  `https://cdn.cloudflare.steamstatic.com/steam/apps/${appId}/header.jpg`,
+];
+
+/** URL primaria (la de mayor calidad). */
+const coverUrl = (appId) => COVER_SOURCES(appId)[0];

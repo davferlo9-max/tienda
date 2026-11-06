@@ -63,7 +63,8 @@
         <div class="card__media">
           ${p.badge ? `<span class="card__badge">${p.badge}</span>` : ""}
           <span class="card__plat">${PLATFORM_LABEL[p.platform]}</span>
-          <span aria-hidden="true">${p.icon}</span>
+          <img class="card__img" src="${coverUrl(p.appId)}" alt="Carátula de ${p.title}"
+               loading="lazy" onerror="this.classList.add('is-broken')" />
         </div>
         <div class="card__body">
           <h3 class="card__title">${p.title}</h3>
@@ -109,7 +110,7 @@
           const p = byId(id);
           return `
             <div class="cart-item">
-              <span class="cart-item__icon" aria-hidden="true">${p.icon}</span>
+              <img class="cart-item__thumb" src="${coverUrl(p.appId)}" alt="" loading="lazy" />
               <div class="cart-item__info">
                 <p class="cart-item__name">${p.title}</p>
                 <p class="cart-item__price">${fmt(p.price)}</p>

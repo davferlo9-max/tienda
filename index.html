@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="GameStore — Tu tienda de videojuegos. Las mejores ofertas en PS5, Xbox, Switch y PC." />
+  <title>GameStore · Tienda de Videojuegos</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500;700;900&family=Rubik:wght@400;500;600&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <!-- ░░ CABECERA ░░ -->
+  <header class="header">
+    <div class="header__inner">
+      <a href="#" class="logo" aria-label="GameStore inicio">
+        <span class="logo__mark">▸</span>GAME<span class="logo__accent">STORE</span>
+      </a>
+
+      <form class="search" role="search" onsubmit="return false;">
+        <input id="search" type="search" class="search__input" placeholder="Buscar juegos, consolas, accesorios..." aria-label="Buscar" />
+        <button class="search__btn" type="submit" aria-label="Buscar">🔍</button>
+      </form>
+
+      <div class="header__actions">
+        <button class="icon-btn" aria-label="Favoritos">♥</button>
+        <button class="icon-btn cart-toggle" id="cartToggle" aria-label="Abrir carrito">
+          🛒<span class="cart-count" id="cartCount">0</span>
+        </button>
+      </div>
+    </div>
+
+    <!-- ░░ BARRA DE CATEGORÍAS ░░ -->
+    <nav class="nav" aria-label="Categorías">
+      <ul class="nav__list" id="categoryNav">
+        <li><button class="nav__item is-active" data-cat="all">Todos</button></li>
+        <li><button class="nav__item" data-cat="ps5">PlayStation 5</button></li>
+        <li><button class="nav__item" data-cat="xbox">Xbox Series</button></li>
+        <li><button class="nav__item" data-cat="switch">Nintendo Switch</button></li>
+        <li><button class="nav__item" data-cat="pc">PC</button></li>
+      </ul>
+    </nav>
+  </header>
+
+  <!-- ░░ HERO ░░ -->
+  <section class="hero">
+    <div class="hero__content">
+      <p class="hero__tag">OFERTA DE LA SEMANA</p>
+      <h1 class="hero__title">Hasta <span>-40%</span> en los últimos lanzamientos</h1>
+      <p class="hero__sub">PS5 · Xbox Series X|S · Nintendo Switch · PC</p>
+      <a href="#catalogo" class="btn btn--primary">Ver ofertas</a>
+    </div>
+  </section>
+
+  <!-- ░░ CATÁLOGO ░░ -->
+  <main class="catalog" id="catalogo">
+    <div class="catalog__head">
+      <h2 class="section-title">Catálogo</h2>
+      <select id="sort" class="sort" aria-label="Ordenar">
+        <option value="featured">Destacados</option>
+        <option value="price-asc">Precio: menor a mayor</option>
+        <option value="price-desc">Precio: mayor a menor</option>
+        <option value="name">Nombre (A-Z)</option>
+      </select>
+    </div>
+    <div class="grid" id="productGrid"><!-- render dinámico --></div>
+    <p class="empty" id="emptyState" hidden>No se encontraron productos. 🎮</p>
+  </main>
+
+  <!-- ░░ CARRITO (panel lateral) ░░ -->
+  <aside class="cart" id="cartPanel" aria-hidden="true" aria-label="Carrito de compra">
+    <div class="cart__head">
+      <h3>Tu carrito</h3>
+      <button class="icon-btn" id="cartClose" aria-label="Cerrar carrito">✕</button>
+    </div>
+    <div class="cart__items" id="cartItems"></div>
+    <div class="cart__foot">
+      <div class="cart__total"><span>Total</span><strong id="cartTotal">0,00 €</strong></div>
+      <button class="btn btn--primary btn--block" id="checkoutBtn">Finalizar compra</button>
+    </div>
+  </aside>
+  <div class="overlay" id="overlay" hidden></div>
+
+  <!-- ░░ PIE ░░ -->
+  <footer class="footer">
+    <div class="footer__inner">
+      <div>
+        <span class="logo"><span class="logo__mark">▸</span>GAME<span class="logo__accent">STORE</span></span>
+        <p class="footer__note">Tu tienda de videojuegos de confianza.</p>
+      </div>
+      <nav class="footer__col">
+        <h4>Tienda</h4>
+        <a href="#">Novedades</a><a href="#">Ofertas</a><a href="#">Preventa</a>
+      </nav>
+      <nav class="footer__col">
+        <h4>Ayuda</h4>
+        <a href="#">Envíos</a><a href="#">Devoluciones</a><a href="#">Contacto</a>
+      </nav>
+    </div>
+    <p class="footer__copy">© 2026 GameStore · Demo con fines educativos.</p>
+  </footer>
+
+  <script src="data.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>
